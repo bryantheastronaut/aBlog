@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 import Client from './Client';
+import PostsContainer from './PostsContainer';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: []
+    }
+  }
+  componentDidMount() {
+    Client.getPosts()
+      .then(posts => {
+        this.setState({
+          posts: posts
+        });
+      })
+      .catch(err=> {
+        console.error(err)
+      });
+  }
   render() {
-    Client.getPosts().then(post => console.log(post)); 
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <PostsContainer posts={this.state.posts} />
       </div>
     );
   }

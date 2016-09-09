@@ -1,5 +1,6 @@
+
 function getPosts() {
-  return fetch('/api/blog', {
+  return fetch('http://localhost:3001/api/blog', {
     accept: 'application/json',
   }).then(checkStatus)
     .then(parseJSON);

@@ -1,6 +1,7 @@
 'use strict'
 
 var express = require('express');
+var cors = require('cors');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var Blog = require('./src/models/blog');
@@ -16,6 +17,7 @@ mongoose.connect('mongodb://bryan:password1@ds019836.mlab.com:19836/bryandb')
 //body parser config
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
 //routes
 router.use(function(req, res, next) {
